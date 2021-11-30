@@ -1,4 +1,5 @@
-import { del, get, post } from 'superagent';
+import  get  from 'superagent';
+import post from 'superagent';
 import { StatusCodes } from 'http-status-codes';
 import * as chai from 'chai';
 
@@ -38,10 +39,9 @@ describe('Order Tests', () => {
 
     it('Get order by Id', async () => {
         const id = 1;
-        const response = await del('https://localhost:8080/api/order/'+id)
+        const response = await get('https://localhost:8080/api/order/'+id)
             .set('Content-type', 'application/json')
             .set('Accept', 'application/json');
         expect(response.status).to.equal(204);
     });
-
 });

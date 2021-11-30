@@ -1,4 +1,5 @@
-import { get } from 'superagent';
+import get from 'superagent';
+import del from 'superagent';
 import { StatusCodes } from 'http-status-codes';
 import * as chai from 'chai';
 
