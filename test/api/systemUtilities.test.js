@@ -10,7 +10,7 @@ describe('System utilities Tests', () => {
     });
 
     it('Getting container ID using GET', async () => {
-        const response = await get('https://localhost:8080//utility/containerid/')
+        const response = await get('http://localhost:8080//utility/containerid/')
             .set('Content-type','application/json')
             .set('Accept','application/json');
         expect(response.status).to.equal(StatusCodes.OK);
