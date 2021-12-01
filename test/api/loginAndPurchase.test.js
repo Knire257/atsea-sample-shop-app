@@ -11,7 +11,7 @@ describe('Login And Purchase', () => {
 
     it('Purchase', async () => {
       const response = await ajax.get('http://localhost:8080/purchase/')
-          .set('Content-type', 'application/json')
+          .set('Content-type', 'application/json;charset=UTF-8')
           .set('Accept', 'application/json')
       expect(response.status).to.equal(StatusCodes.OK);
       expect(response.body).to.have.property('message');

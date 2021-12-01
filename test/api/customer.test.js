@@ -2,13 +2,12 @@ import  get  from 'superagent';
 import  ajax  from 'superagent';
 import { StatusCodes } from 'http-status-codes';
 import * as chai from 'chai';
-import * as superagent from 'superagent'
 
 const expect = chai.expect;
 
 describe('Customer tests', () => {
     it('Create customer', async () => {
-        const response = await superagent.post('http://localhost:8080/api/customer/')
+        const response = await ajax.post('http://localhost:8080/api/customer/')
             .send({
                 "customerId" : 1,
                 "name"       : "Sally Vallery",
