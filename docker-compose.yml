@@ -1,14 +1,74 @@
+# version: "3.1"
+
+# services:
+#   reverse_proxy:
+#     build: ./reverse_proxy
+#     user: nginx
+
+#   database:
+#     build: 
+#        context: ./database
+#     image: atsea_db
+#     user: postgres
+#     environment:
+#       POSTGRES_USER: gordonuser
+#       POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+#       POSTGRES_DB: atsea
+#     ports:
+#       - "5432:5432" 
+#     networks:
+#       - back-tier
+#     secrets:
+#       - postgres_password
+
+#   appserver:
+#     build:
+#        context: app
+#        dockerfile: Dockerfile
+#     image: atsea_app
+#     user: gordon
+#     ports:
+#       - "8080:8080" 
+#       - "5005:5005"
+#     networks:
+#       - front-tier
+#       - back-tier
+#     secrets:
+#       - postgres_password
+
+#   payment_gateway:
+#     build:
+#       context: payment_gateway
+#     networks:
+#       - payment
+#     secrets:
+#       - payment_token
+
+# networks:
+#   front-tier:
+#   back-tier:
+#   payment:
+#     driver: overlay
+ 
+# secrets:
+#   postgres_password:
+#     file: ./devsecrets/postgres_password
+#   payment_token:
+#     file: ./devsecrets/payment_token
+
 version: "3.1"
 
 services:
   reverse_proxy:
     build: ./reverse_proxy
+    image: knire257/atsea-shop:atsea_reverse_proxy
     user: nginx
 
   database:
+    
     build: 
        context: ./database
-    image: atsea_db
+    image: knire257/atsea-shop:atsea_db
     user: postgres
     environment:
       POSTGRES_USER: gordonuser
@@ -22,10 +82,10 @@ services:
       - postgres_password
 
   appserver:
+    image: knire257/atsea-shop:atsea_app
     build:
        context: app
        dockerfile: Dockerfile
-    image: atsea_app
     user: gordon
     ports:
       - "8080:8080" 
@@ -37,6 +97,7 @@ services:
       - postgres_password
 
   payment_gateway:
+    image: knire257/atsea-shop:atsea_payment_gateway
     build:
       context: payment_gateway
     networks:
@@ -55,3 +116,4 @@ secrets:
     file: ./devsecrets/postgres_password
   payment_token:
     file: ./devsecrets/payment_token
+
