@@ -60,14 +60,10 @@ version: "3.1"
 
 services:
   reverse_proxy:
-    build: ./reverse_proxy
     image: knire257/atsea-shop:atsea_reverse_proxy
     user: nginx
 
   database:
-    
-    build: 
-       context: ./database
     image: knire257/atsea-shop:atsea_db
     user: postgres
     environment:
@@ -83,9 +79,6 @@ services:
 
   appserver:
     image: knire257/atsea-shop:atsea_app
-    build:
-       context: app
-       dockerfile: Dockerfile
     user: gordon
     ports:
       - "8080:8080" 
@@ -98,8 +91,6 @@ services:
 
   payment_gateway:
     image: knire257/atsea-shop:atsea_payment_gateway
-    build:
-      context: payment_gateway
     networks:
       - payment
     secrets:
