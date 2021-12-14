@@ -79,6 +79,7 @@ jobs:
           echo ${{ secrets.POSTGRES_PASSWORD }} > devsecrets/postgres_password
           echo ${{ secrets.PAYMENT_TOKEN }} > devsecrets/payment_token
           docker swarm leave -f
+          docker-compose down
           docker network prune -f
           docker kill $(docker ps -aq)
           docker rmi $(docker images -a -q)
