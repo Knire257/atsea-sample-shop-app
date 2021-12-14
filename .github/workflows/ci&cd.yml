@@ -78,8 +78,12 @@ jobs:
           if ! [[ -d "./run_selenium" ]]; then mkdir run_selenium; fi
           echo ${{ secrets.POSTGRES_PASSWORD }} > devsecrets/postgres_password
           echo ${{ secrets.PAYMENT_TOKEN }} > devsecrets/payment_token
+          docker swarm leave -f
+          docker network prune -f
+          docker kill $(docker ps -aq)
+          docker rmi $(docker images -a -q)
           docker swarm init
-          docker-compose up
+          docker-compose up -d
         
         
     - name: Trigger end to end tests
