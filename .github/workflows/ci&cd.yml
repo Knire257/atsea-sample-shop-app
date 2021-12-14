@@ -78,7 +78,6 @@ jobs:
           if ! [[ -d "./run_selenium" ]]; then mkdir run_selenium; fi
           echo ${{ secrets.POSTGRES_PASSWORD }} > devsecrets/postgres_password
           echo ${{ secrets.PAYMENT_TOKEN }} > devsecrets/payment_token
-          docker swarm init
           docker stack deploy --compose-file docker-compose.yml atsea
         
         
